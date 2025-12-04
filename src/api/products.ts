@@ -1,5 +1,5 @@
-import axiosInstance from './axios';
-import { BACKEND_URL } from '../config/backend'; // 👈 NUEVO
+// src/api/products.ts
+import axiosInstance, { API_BASE } from './axios';
 
 export interface Producto {
   id: number;
@@ -12,11 +12,11 @@ export interface Producto {
   caracteristicas?: Record<string, string>;
 }
 
-// ✅ Deja SOLO ESTA versión, con todo lo que usas
+// ✅ ÚNICA versión del payload
 export interface SaveProductoPayload {
   nombre: string;
   precio: string;
-  imagen: string; // URL relativa o completa
+  imagen: string;              // URL relativa ("/uploads/...") o completa
   descripcion: string;
   categoria: string;
   stock?: string;
@@ -25,21 +25,21 @@ export interface SaveProductoPayload {
 
 // 🔹 Helper global para imágenes
 export const buildImageUrl = (img: string) =>
-  img.startsWith('http') ? img : `${BACKEND_URL}${img}`;
+  img.startsWith('http') ? img : `${API_BASE}${img}`;
 
-// Obtener todos los productos
+// 🔹 Obtener todos los productos
 export const getProductos = async (): Promise<Producto[]> => {
   const res = await axiosInstance.get<Producto[]>('/productos');
   return res.data;
 };
 
-// Obtener detalle por ID
+// 🔹 Obtener detalle por ID
 export const getProductoById = async (id: number): Promise<Producto> => {
   const res = await axiosInstance.get<Producto>(`/productos/${id}`);
   return res.data;
 };
 
-// Productos por categoría
+// 🔹 Productos por categoría
 export const getProductosByCategoria = async (
   categoria: string
 ): Promise<Producto[]> => {
@@ -49,7 +49,7 @@ export const getProductosByCategoria = async (
   return res.data;
 };
 
-// Crear producto
+// 🔹 Crear producto
 export const createProducto = async (
   payload: SaveProductoPayload
 ): Promise<Producto> => {
@@ -57,7 +57,7 @@ export const createProducto = async (
   return res.data;
 };
 
-// Actualizar producto
+// 🔹 Actualizar producto
 export const updateProducto = async (
   id: number,
   payload: SaveProductoPayload
@@ -66,11 +66,12 @@ export const updateProducto = async (
   return res.data;
 };
 
+// 🔹 Eliminar producto
 export const deleteProducto = async (id: number): Promise<void> => {
   await axiosInstance.delete(`/productos/${id}`);
 };
 
-// Subir imagen y devolver URL relativa, tipo "/uploads/productos/xxx.jpg"
+// 🔹 Subir imagen y devolver URL relativa, tipo "/uploads/productos/xxx.jpg"
 export const uploadProductoImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
@@ -85,6 +86,6 @@ export const uploadProductoImage = async (file: File): Promise<string> => {
     }
   );
 
-  // Sigue devolviendo la URL relativa "/uploads/..."
+  // el backend devuelve algo como "/uploads/productos/led1.jpg"
   return res.data.url;
 };
