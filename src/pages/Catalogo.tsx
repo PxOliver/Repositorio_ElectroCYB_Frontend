@@ -5,7 +5,7 @@ import { formatPriceWithSymbol } from '../config/currency';
 import AddToCartButton from '../components/AddToCartButton';
 import { getProductos, Producto } from '../api/products';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { buildImageUrl } from '../api/products'; // 👈 arriba
+import { API_BASE } from '../api/axios';
 
 const Catalogo: React.FC = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
@@ -14,7 +14,8 @@ const Catalogo: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const getImageUrl = buildImageUrl;
+  const getImageUrl = (img: string) =>
+    img.startsWith('http') ? img : `${API_BASE}${img}`;
 
   // Cargar productos desde el backend
   useEffect(() => {
