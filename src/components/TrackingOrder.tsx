@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { getOrderByNumero, OrderResponse, OrderStatus } from '../api/orders';
 import { formatPriceWithSymbol } from '../config/currency';
+import { API_BASE } from '../api/axios';
 
 interface TrackingOrderProps {
   orderId: string; // aquí llega el numeroPedido, ej: EC-000001
@@ -223,7 +224,7 @@ const TrackingOrder: React.FC<TrackingOrderProps> = ({ orderId }) => {
               {order.items.map((item) => {
                 const imagenSrc = item.imagen.startsWith('http')
                   ? item.imagen
-                  : `http://localhost:8080${item.imagen}`;
+                  : `${API_BASE}${item.imagen}`;
 
                 const itemUnitNumeric = parseFloat(item.precio);
                 const itemTotalNumeric = itemUnitNumeric * item.cantidad;
