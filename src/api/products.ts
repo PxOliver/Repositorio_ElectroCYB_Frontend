@@ -66,6 +66,10 @@ export const updateProducto = async (
   return res.data;
 };
 
+export const deleteProducto = async (id: number): Promise<void> => {
+  await axiosInstance.delete(`/productos/${id}`);
+};
+
 // Subir imagen y devolver URL relativa, tipo "/uploads/productos/xxx.jpg"
 export const uploadProductoImage = async (file: File): Promise<string> => {
   const formData = new FormData();
