@@ -22,6 +22,8 @@ export interface CreateOrderPayload {
   cliente: ClientePayload;
   items: OrderItemPayload[];
   metodoPago: string;
+  metodoEntrega: 'domicilio' | 'tienda' | 'envio';
+  costoEnvio: number;
   notas?: string;
 }
 
