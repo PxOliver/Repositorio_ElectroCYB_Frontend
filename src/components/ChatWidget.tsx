@@ -9,7 +9,7 @@ import {
   VolumeX,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axiosInstance, { API_BASE } from '../api/axios'; // 👈 IMPORTAMOS API_BASE
+import axiosInstance, { API_BASE } from '../api/axios';
 
 // ------------------ Interfaces ------------------
 
@@ -31,7 +31,6 @@ interface ParsedProductBlock {
   outro?: string;
 }
 
-// Información de producto traída del backend
 interface ProductoDetalleApi {
   id: number;
   nombre: string;
@@ -41,9 +40,6 @@ interface ProductoDetalleApi {
   precio: string;
   stock: number;
 }
-
-// ❌ YA NO DEFINIMOS BACKEND_BASE_URL AQUÍ
-// 🔧 Las imágenes usarán API_BASE, igual que el carrito
 
 // Sugerencias rápidas
 const quickSuggestions = [
@@ -93,14 +89,12 @@ const parseProductsFromMessage = (content: string): ParsedProductBlock | null =>
     let description: string | undefined;
 
     if (parts.length >= 2) {
-      // Heurística: si contiene "S/" o "USD" lo tratamos como precio
       if (parts[1].toLowerCase().includes('s/')) {
         price = parts[1];
         if (parts.length >= 3) {
           description = parts.slice(2).join(' — ');
         }
       } else {
-        // Si no tiene moneda, lo tomamos como descripción
         description = parts.slice(1).join(' — ');
       }
     }
@@ -128,8 +122,6 @@ const ProductCard: React.FC<{
       if (!product.id) return;
       setIsLoading(true);
       try {
-        // axiosInstance suele tener baseURL = `${API_BASE}/api`
-        // Aquí llamamos a GET {API_BASE}/api/productos/{id}
         const res = await axiosInstance.get<ProductoDetalleApi>(
           `/productos/${product.id}`
         );
@@ -148,7 +140,6 @@ const ProductCard: React.FC<{
   const displayPrice = detalle?.precio ? `S/ ${detalle.precio}` : product.price;
   const displayDescription = detalle?.descripcion ?? product.description;
 
-  // Construimos la URL completa de la imagen usando API_BASE (igual que en CartDrawer)
   const rawImagePath = detalle?.imagen;
   const imageUrl =
     rawImagePath && rawImagePath.length > 0
@@ -159,7 +150,6 @@ const ProductCard: React.FC<{
 
   return (
     <div className="border border-gray-200 rounded-xl p-3 bg-gray-50 flex gap-2">
-      {/* Imagen */}
       {imageUrl ? (
         <div className="flex-shrink-0">
           <img
@@ -174,7 +164,6 @@ const ProductCard: React.FC<{
         </div>
       )}
 
-      {/* Info */}
       <div className="flex flex-col gap-1 flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2">
           <h4 className="font-semibold text-sm text-gray-900 truncate">
@@ -194,7 +183,6 @@ const ProductCard: React.FC<{
         )}
 
         <div className="mt-1 flex flex-wrap gap-2">
-          {/* Preguntar por el producto */}
           <button
             type="button"
             onClick={() =>
@@ -209,7 +197,6 @@ const ProductCard: React.FC<{
             Preguntar por este producto
           </button>
 
-          {/* Ver producto (si tenemos id) */}
           {product.id && (
             <Link
               to={`/catalogo/${product.id}`}
@@ -241,8 +228,8 @@ const ChatWidget: React.FC = () => {
   const [readAloud, setReadAloud] = useState(false);
 
   const recognitionRef = useRef<any>(null);
-  const finalTranscriptRef = useRef<string>(''); // acumulamos el texto final
-  const hasSentVoiceRef = useRef<boolean>(false); // evita múltiples envíos
+  const finalTranscriptRef = useRef<string>('');
+  const hasSentVoiceRef = useRef<boolean>(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
@@ -263,18 +250,17 @@ const ChatWidget: React.FC = () => {
 
       window.speechSynthesis.cancel();
       const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'es-PE'; // español Perú
+      utter.lang = 'es-PE';
       window.speechSynthesis.speak(utter);
     },
     [readAloud]
   );
 
-  // -------- Enviar mensaje al backend (evitando duplicar burbuja user) --------
+  // -------- Enviar mensaje al backend --------
   const sendMessage = async (text: string) => {
     const trimmed = text.trim();
     if (!trimmed || isSending) return;
 
-    // 1) Construimos el historial que enviaremos (sin duplicar última burbuja de usuario)
     const last = messages[messages.length - 1];
     let historyMessages: ChatMessage[] = messages;
 
@@ -374,7 +360,6 @@ const ChatWidget: React.FC = () => {
     const recognition = initRecognition();
     if (!recognition) return;
 
-    // reiniciamos acumuladores de esta sesión de voz
     recognitionRef.current = recognition;
     finalTranscriptRef.current = '';
     hasSentVoiceRef.current = false;
@@ -409,7 +394,6 @@ const ChatWidget: React.FC = () => {
       setIsListening(false);
       recognitionRef.current = null;
 
-      // AUTO-ENVÍO solo una vez
       if (hasSentVoiceRef.current) return;
 
       const textToSend =
@@ -429,7 +413,6 @@ const ChatWidget: React.FC = () => {
     const parsed = parseProductsFromMessage(content);
 
     if (!parsed || parsed.products.length === 0) {
-      // Mensaje normal
       return (
         <div className="px-3 py-2 rounded-2xl max-w-[80%] whitespace-pre-wrap bg-white text-gray-800 border border-gray-200 rounded-bl-sm shadow-sm">
           {content}
@@ -443,7 +426,6 @@ const ChatWidget: React.FC = () => {
           <p className="text-sm whitespace-pre-wrap">{parsed.intro}</p>
         )}
 
-        {/* Grid de cards de productos */}
         <div className="grid grid-cols-1 gap-2">
           {parsed.products.map((p, i) => (
             <ProductCard key={i} product={p} setInput={setInput} />
@@ -461,35 +443,28 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Botón flotante (abajo a la IZQUIERDA) */}
       <button
         onClick={toggleOpen}
         className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-40 group"
         aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat'}
       >
         <div className="flex items-center gap-3">
-          {/* Etiqueta solo en desktop */}
           <div className="hidden md:flex items-center bg-white/90 backdrop-blur px-3 py-2 rounded-full text-xs text-slate-700 border border-slate-200 shadow-md group-hover:bg-white">
             ¿Necesitas ayuda?
           </div>
 
-          {/* Burbuja principal del bot */}
           <div className="relative h-12 w-12 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-xl border border-white group-hover:scale-105 transition-transform">
             <MessageCircle className="h-6 w-6 text-white" />
-            {/* indicador online */}
             <span className="absolute -top-0.5 -right-0.5 h-3 w-3 bg-emerald-400 rounded-full border-2 border-white" />
           </div>
         </div>
       </button>
 
-      {/* Ventana de chat */}
       {isOpen && (
         <div className="fixed bottom-20 left-4 md:bottom-24 md:left-8 z-40 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
-          {/* Header */}
           <div className="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold">
-                {/* Icono del bot */}
                 <MessageCircle className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -501,7 +476,6 @@ const ChatWidget: React.FC = () => {
               </div>
             </div>
 
-            {/* Controles de voz en el header */}
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -530,7 +504,6 @@ const ChatWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* Mensajes */}
           <div className="flex-1 flex flex-col bg-gray-50">
             <div className="flex-1 p-3 space-y-2 max-h-80 overflow-y-auto text-sm">
               {messages.map((m, idx) => (
@@ -565,7 +538,6 @@ const ChatWidget: React.FC = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Sugerencias rápidas */}
             <div className="px-3 pb-1 flex flex-wrap gap-2 text-[11px] border-t border-gray-100 bg-gray-50">
               {quickSuggestions.map((q) => (
                 <button
@@ -580,10 +552,8 @@ const ChatWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* Input */}
           <div className="border-t border-gray-200 p-2 bg-white">
             <div className="flex items-end gap-2">
-              {/* Botón micrófono */}
               <button
                 type="button"
                 onClick={handleToggleListening}
