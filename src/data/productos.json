@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "Lámpara LED Moderna Circular",
     "precio": "35.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0091.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0091.jpg",
     "descripcion": "Lámpara LED de diseño moderno para sala o comedor. Bajo consumo energético.",
     "categoria": "Lámparas",
     "caracteristicas": {
@@ -22,7 +22,7 @@
     "id": 2,
     "nombre": "Fuente de poder 12V 10A",
     "precio": "45.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0089.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0089.jpg",
     "descripcion": "Fuente de poder 12V 10A con armazon de aluminio",
     "categoria": "Fuentes de poder",
     "caracteristicas": {
@@ -39,7 +39,7 @@
     "id": 3,
     "nombre": "Lámpara LED Moderna Circular",
     "precio": "20.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0088.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0088.jpg",
     "descripcion": "Estilo industrial moderno. Ideal para cocinas y comedores.",
     "categoria": "Lámparas",
     "caracteristicas": {
@@ -59,7 +59,7 @@
     "id": 4,
     "nombre": "Detector de Billetes Falsos",
     "precio": "50.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0024.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0024.jpg",
     "descripcion": "Detector de billetes falsos para evitar fraude en transacciones.",
     "categoria": "Detector de billetes falsos",
     "caracteristicas": {
@@ -75,7 +75,7 @@
     "id": 5,
     "nombre": "Foco LED RGB con Parlante",
     "precio": "30.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0027.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0027.jpg",
     "descripcion": "Foco LED RGB con parlante para ambientes.",
     "categoria": "Focos LED RGB",
     "caracteristicas": {
@@ -94,7 +94,7 @@
     "id": 6,
     "nombre": "Foco LED 5W Calido",
     "precio": "5.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0030.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0030.jpg",
     "descripcion": "Foco de luz calida.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -113,7 +113,7 @@
     "id": 7,
     "nombre": "Tira LED RGB Inteligente",
     "precio": "75.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0032.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0032.jpg",
     "descripcion": "Tira LED RGB con control por aplicación móvil. 5 metros de longitud.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -133,7 +133,7 @@
     "id": 8,
     "nombre": "Lámpara LED Moderna con Sensor de Movimiento",
     "precio": "22.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0058.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0058.jpg",
     "descripcion": "Reflector LED de alta potencia para exteriores con Sensor de Movimiento. Ideal para interiores y fachadas.",
     "categoria": "Lámparas",
     "caracteristicas": {
@@ -153,7 +153,7 @@
     "id": 9,
     "nombre": "Kit Solar con Radio y Linterna",
     "precio": "90.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0033.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0033.jpg",
     "descripcion": "Kit Solar con Radio y Linterna, ideal para emergencias y actividades al aire libre.",
     "categoria": "Linternas",
     "caracteristicas": {
@@ -171,7 +171,7 @@
     "id": 10,
     "nombre": "Cinta LED NEON ",
     "precio": "20.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0021.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0021.jpg",
     "descripcion": "Cinta LED NEON 5 metros, luz continua, flexible ideal para letreros.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -188,7 +188,7 @@
     "id": 11,
     "nombre": "Manguera LED RGB",
     "precio": "10.00 x metro",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0016.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0016.jpg",
     "descripcion": "Manguera LED RGB, luz continua, flexible ideal para letreros y Proyectos.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -205,7 +205,7 @@
     "id": 12,
     "nombre": "Manguera LED",
     "precio": "7.00 x metro",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0017.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0017.jpg",
     "descripcion": "Manguera LED, luz continua, flexible ideal para letreros y Proyectos.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -222,7 +222,7 @@
     "id": 13,
     "nombre": "Manguera LED Navideña",
     "precio": "3.50 x metro",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0019.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0019.jpg",
     "descripcion": "Manguera LED Navideña, luz continua, flexible ideal para Proyectos y Figuras navideñas.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -239,7 +239,7 @@
     "id": 14,
     "nombre": "Kit Solar con Radio y Linterna",
     "precio": "50.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0038.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0038.jpg",
     "descripcion": "Kit Solar con Radio y Linterna, ideal para emergencias y actividades al aire libre.",
     "categoria": "Linternas",
     "caracteristicas": {
@@ -257,7 +257,7 @@
     "id": 15,
     "nombre": "Estaño para Soldar",
     "precio": "80.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0041.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0041.jpg",
     "descripcion": "Estaño para soldar 1mm x 500g, ideal para proyectos electrónicos y eléctricos.",
     "categoria": "Accesorios",
     "caracteristicas": {
@@ -271,7 +271,7 @@
     "id": 16,
     "nombre": "Modulos LED ",
     "precio": "2.50 x Unidad",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0042.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0042.jpg",
     "descripcion": "Modulos LED ideal para letreros y Proyectos.",
     "categoria": "Tiras LED",
     "caracteristicas": {
@@ -288,7 +288,7 @@
     "id": 17,
     "nombre": "Luminaria LED",
     "precio": "Consultar",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0043.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0043.jpg",
     "descripcion": "Luminaria LED ideal para Espacios grandes.",
     "categoria": "Lámparas",
     "caracteristicas": {
@@ -306,7 +306,7 @@
     "id": 18,
     "nombre": "Extension de 16 puertos ",
     "precio": "50.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0060.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0060.jpg",
     "descripcion": "Extension de 16 puertos con interruptor individual y proteccion contra sobrecargas.",
     "categoria": "Accesorios",
     "caracteristicas": {
@@ -320,7 +320,7 @@
     "id": 19,
     "nombre": "Foco LED 45W Mariposa",
     "precio": "30.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0047.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0047.jpg",
     "descripcion": "Foco de luz Blanca.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -339,7 +339,7 @@
     "id": 20,
     "nombre": "Foco LED Recargable con Panel Solar",
     "precio": "30.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0065.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0065.jpg",
     "descripcion": "Foco de luz Blanca Recargable con Panel Solar.",
     "categoria": "Focos LED Recargables",
     "caracteristicas": {
@@ -358,7 +358,7 @@
     "id": 21,
     "nombre": "Foco LED Recargable",
     "precio": "20.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0066.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0066.jpg",
     "descripcion": "Foco de luz Blanca Recargable.",
     "categoria": "Focos LED Recargables",
     "caracteristicas": {
@@ -377,7 +377,7 @@
     "id": 22,
     "nombre": "Foco LED 36W Mariposa",
     "precio": "20.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0049.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0049.jpg",
     "descripcion": "Foco de luz Blanca con Hojas para un mejor alcance de luz.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -395,7 +395,7 @@
     "id": 23,
     "nombre": "Reflectores LED",
     "precio": "Consultar",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0053.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0053.jpg",
     "descripcion": "Reflectores LED de alta potencia para exteriores. Ideal para interiores y fachadas.",
     "categoria": "Reflectores LED",
     "caracteristicas": {
@@ -413,7 +413,7 @@
     "id": 24,
     "nombre": "Foco LED 3W",
     "precio": "5.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0067.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0067.jpg",
     "descripcion": "Foco de luz BLanca.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -432,7 +432,7 @@
     "id": 25,
     "nombre": "Foco LED RGB",
     "precio": "10.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0070.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0070.jpg",
     "descripcion": "Foco de luz RGB ideal para ambientes.",
     "categoria": "Focos LED RGB",
     "caracteristicas": {
@@ -450,7 +450,7 @@
     "id": 26,
     "nombre": "Foco LED Dimmer",
     "precio": "15.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0073.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0073.jpg",
     "descripcion": "Foco de luz BLanca variable con 3 niveles de iluminacion.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -469,7 +469,7 @@
     "id": 27,
     "nombre": "Foco LED 9w Calida",
     "precio": "7.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0074.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0074.jpg",
     "descripcion": "Foco de luz calida.",
     "categoria": "Focos LED",
     "caracteristicas": {
@@ -488,7 +488,7 @@
     "id": 28,
     "nombre": "Lampara de Emergencia LED Recargable",
     "precio": "50.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0054.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0054.jpg",
     "descripcion": "Lampara de Emergencia LED Recargable",
     "categoria": "Lamparas de Emergencia",
     "caracteristicas": {
@@ -506,7 +506,7 @@
     "id": 29,
     "nombre": "Lampara de Emergencia LED Recargable",
     "precio": "60.00",
-    "imagen": "/src/ProductosImagen/IMG-20250806-WA0055.jpg",
+    "imagen": "/ProductosImagen/IMG-20250806-WA0055.jpg",
     "descripcion": "Lampara de Emergencia LED Recargable con forma de ojos",
     "categoria": "Lamparas de Emergencia",
     "caracteristicas": {
