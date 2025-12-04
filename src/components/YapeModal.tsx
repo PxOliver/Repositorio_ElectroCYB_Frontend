@@ -6,19 +6,24 @@ interface YapeModalProps {
   isOpen: boolean;
   onClose: () => void;
   total: number;
-  onPaymentComplete: () => void;
+  onPaymentComplete: () => void; // el padre crea el pedido y guarda en backend
 }
 
 type Step = 'qr' | 'confirm';
 
-// 👉 Ruta a la imagen local dentro de /public
-const YAPE_QR_URL = '/ProductosImagen/qryape.jpg';
+// Puedes usar la misma base del backend que usas en axiosInstance,
+// o dejar fijo localhost si estás en desarrollo.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+
+// 👉 Ruta completa a tu imagen del QR de Yape
+const YAPE_QR_URL = `${API_BASE_URL}/uploads/productos/qryape.jpg`;
 
 const YapeModal: React.FC<YapeModalProps> = ({ isOpen, onClose, total, onPaymentComplete }) => {
   const [step, setStep] = useState<Step>('qr');
   const [copied, setCopied] = useState(false);
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false); // 👈 NUEVO
 
+  // Datos de YAPE (reales, excepto el QR que viene del backend como imagen)
   const yapeData = {
     numero: '991194854',
     nombre: 'Electro C & B',
@@ -37,7 +42,9 @@ const YapeModal: React.FC<YapeModalProps> = ({ isOpen, onClose, total, onPayment
   };
 
   const handleConfirmPayment = () => {
+    // El usuario declara que ya pagó
     setStep('confirm');
+    // El padre (Checkout) crea el pedido en el backend con estado RECIBIDO
     onPaymentComplete();
   };
 
@@ -81,7 +88,7 @@ const YapeModal: React.FC<YapeModalProps> = ({ isOpen, onClose, total, onPayment
               <div className="text-center mb-6">
                 <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-lg qr-container overflow-hidden">
                   <img
-                    src={YAPE_QR_URL}
+                    src={yapeData.qrCode}
                     alt="YAPE QR Code"
                     className="w-48 h-48 mx-auto object-contain"
                     onMouseEnter={() => setIsZoomed(true)}
