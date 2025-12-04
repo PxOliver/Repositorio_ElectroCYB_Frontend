@@ -20,6 +20,7 @@ const Header: React.FC = () => {
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <Zap className="h-8 w-8 text-blue-600" />
             <span className="text-2xl font-bold text-gray-800">Electro C & B</span>
@@ -53,16 +54,19 @@ const Header: React.FC = () => {
                 </Link>
               )}
 
-              <Link
-                to="/contacto"
-                className={`font-medium transition-colors ${
-                  isActive('/contacto')
-                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
-                    : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Contáctanos
-              </Link>
+              {/* Contáctanos solo para NO admins */}
+              {!isAdmin && (
+                <Link
+                  to="/contacto"
+                  className={`font-medium transition-colors ${
+                    isActive('/contacto')
+                      ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  Contáctanos
+                </Link>
+              )}
             </nav>
 
             <UserIndicator />
@@ -71,12 +75,18 @@ const Header: React.FC = () => {
             {!isAdmin && <CartIcon />}
           </div>
 
-          {/* Mobile menu button and cart */}
-          <div className="md:hidden flex items-center space-x-4">
+          {/* Mobile: user + carrito + menú TODO JUNTO */}
+          <div className="md:hidden flex items-center space-x-2">
             <UserIndicator />
-            {/* Carrito solo para NO admins en móvil también */}
+
+            {/* Carrito solo para NO admins en móvil */}
             {!isAdmin && <CartIcon />}
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+
+            {/* Menú hamburguesa siempre (admin y no admin) */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-1 rounded-md hover:bg-gray-100"
+            >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -109,15 +119,18 @@ const Header: React.FC = () => {
                 </Link>
               )}
 
-              <Link
-                to="/contacto"
-                onClick={() => setIsMenuOpen(false)}
-                className={`font-medium py-2 text-left transition-colors ${
-                  isActive('/contacto') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Contáctanos
-              </Link>
+              {/* Contáctanos solo para NO admins en el menú móvil */}
+              {!isAdmin && (
+                <Link
+                  to="/contacto"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`font-medium py-2 text-left transition-colors ${
+                    isActive('/contacto') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  Contáctanos
+                </Link>
+              )}
             </nav>
           </div>
         )}
