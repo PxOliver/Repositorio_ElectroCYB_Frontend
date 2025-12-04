@@ -21,6 +21,7 @@ import { useAuth } from '../context/AuthContext';
 import { formatPriceWithSymbol } from '../config/currency';
 import YapeModal from '../components/YapeModal';
 import { createOrder as createOrderApi } from '../api/orders';
+import { API_BASE } from '../api/axios';
 
 const Checkout: React.FC = () => {
   const {
@@ -460,7 +461,7 @@ const Checkout: React.FC = () => {
                 {state.items.map((item) => {
                   const imagenSrc = item.imagen.startsWith('http')
                     ? item.imagen
-                    : `http://localhost:8080${item.imagen}`;
+                    : `${API_BASE}${item.imagen}`;
 
                   const unit = parseFloat(item.precio.replace(/[^\d.]/g, '')) || 0;
                   const totalItem = unit * item.cantidad;

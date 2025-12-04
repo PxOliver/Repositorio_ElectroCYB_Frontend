@@ -3,6 +3,7 @@ import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatPriceWithSymbol } from '../config/currency';
 import { Link } from 'react-router-dom';
+import { API_BASE } from '../api/axios';
 
 const CartDrawer: React.FC = () => {
   const { state, closeCart, updateQuantity, removeItem, getTotalPrice } = useCart();
@@ -49,10 +50,10 @@ const CartDrawer: React.FC = () => {
             ) : (
               <div className="space-y-4">
                 {state.items.map((item) => {
-                  // 👇 Igual que en Catalogo/AdminProducts: si es ruta relativa, le anteponemos el backend
+                  // Igual que en AdminProducts: si es ruta relativa, le anteponemos el backend
                   const imagenSrc = item.imagen.startsWith('http')
                     ? item.imagen
-                    : `http://localhost:8080${item.imagen}`;
+                    : `${API_BASE}${item.imagen}`;
 
                   return (
                     <div

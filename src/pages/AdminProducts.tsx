@@ -11,11 +11,19 @@ import {
   SaveProductoPayload,
 } from '../api/products';
 import { formatPriceWithSymbol } from '../config/currency';
+import { API_BASE } from '../api/axios';
 
 interface CaracteristicaRow {
   key: string;
   value: string;
 }
+
+// Helper para construir URLs de imagen válidas en local y en producción
+const buildImageUrl = (path?: string | null) => {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  return `${API_BASE}${path}`;
+};
 
 const AdminProducts: React.FC = () => {
   const [productos, setProductos] = useState<Producto[]>([]);
@@ -33,7 +41,7 @@ const AdminProducts: React.FC = () => {
     stock: '',
   });
 
-  // 👇 Estado local para manejar características como filas {key, value}
+  // Estado local para manejar características como filas {key, value}
   const [caracteristicas, setCaracteristicas] = useState<CaracteristicaRow[]>([]);
 
   const [isSaving, setIsSaving] = useState(false);
@@ -118,7 +126,7 @@ const AdminProducts: React.FC = () => {
 
     try {
       setIsUploadingImage(true);
-      const url = await uploadProductoImage(file);
+      const url = await uploadProductoImage(file); // backend devuelve algo tipo "/uploads/archivo.jpg"
       setFormData((prev) => ({
         ...prev,
         imagen: url,
@@ -131,15 +139,14 @@ const AdminProducts: React.FC = () => {
     }
   };
 
-  // 👇 Manejo del CRUD de características en el formulario
-
+  // Manejo del CRUD de características en el formulario
   const handleAddCaracteristica = () => {
     setCaracteristicas((prev) => [...prev, { key: '', value: '' }]);
   };
 
   const handleCaracteristicaChange = (index: number, field: 'key' | 'value', value: string) => {
     setCaracteristicas((prev) =>
-      prev.map((row, i) => (i === index ? { ...row, [field]: value } : row))
+      prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)),
     );
   };
 
@@ -196,7 +203,7 @@ const AdminProducts: React.FC = () => {
 
       if (saved.caracteristicas) {
         const rows: CaracteristicaRow[] = Object.entries(saved.caracteristicas).map(
-          ([key, value]) => ({ key, value })
+          ([key, value]) => ({ key, value }),
         );
         setCaracteristicas(rows);
       } else {
@@ -342,11 +349,7 @@ const AdminProducts: React.FC = () => {
                   {formData.imagen && (
                     <div className="mt-3">
                       <img
-                        src={
-                          formData.imagen.startsWith('http')
-                            ? formData.imagen
-                            : `http://localhost:8080${formData.imagen}`
-                        }
+                        src={buildImageUrl(formData.imagen)}
                         alt="Preview"
                         className="w-full h-40 object-cover rounded-lg border"
                       />
@@ -460,11 +463,7 @@ const AdminProducts: React.FC = () => {
                         <tr key={p.id} className="border-t">
                           <td className="px-3 py-2">
                             <img
-                              src={
-                                p.imagen.startsWith('http')
-                                  ? p.imagen
-                                  : `http://localhost:8080${p.imagen}`
-                              }
+                              src={buildImageUrl(p.imagen)}
                               alt={p.nombre}
                               className="w-12 h-12 object-cover rounded"
                             />
@@ -478,19 +477,14 @@ const AdminProducts: React.FC = () => {
                               {p.categoria}
                             </span>
                           </td>
-                          <td className="px-3 py-2">
-                            {formatPriceWithSymbol(p.precio)}
-                          </td>
+                          <td className="px-3 py-2">{formatPriceWithSymbol(p.precio)}</td>
                           <td className="px-3 py-2">
                             <span
                               className={`text-xs font-semibold ${
-                                p.stock === 0
-                                  ? 'text-red-600'
-                                  : 'text-green-600'
+                                p.stock === 0 ? 'text-red-600' : 'text-green-600'
                               }`}
                             >
-                              {p.stock ?? 0}{' '}
-                              {p.stock === 1 ? 'unidad' : 'unidades'}
+                              {p.stock ?? 0} {p.stock === 1 ? 'unidad' : 'unidades'}
                             </span>
                           </td>
                           <td className="px-3 py-2 text-right">
