@@ -330,16 +330,14 @@ const Checkout: React.FC = () => {
     let direccionEnvio = '';
 
     if (deliveryMethod === 'domicilio') {
-      direccionEnvio = `${formData.direccion}${
-        formData.distrito ? ', ' + formData.distrito : ''
-      }${formData.departamento ? ', ' + formData.departamento : ', Lima'}`;
+      direccionEnvio = `${formData.direccion}${formData.distrito ? ', ' + formData.distrito : ''
+        }${formData.departamento ? ', ' + formData.departamento : ', Lima'}`;
     } else if (deliveryMethod === 'envio') {
-      direccionEnvio = `${formData.direccion}${
-        formData.departamento ? ', ' + formData.departamento : ''
-      }`;
-    } else {
-      // tienda
-      direccionEnvio = 'Recojo en tienda - Lima';
+      direccionEnvio = `${formData.direccion}${formData.departamento ? ', ' + formData.departamento : ''
+        }`;
+    } else if (deliveryMethod === 'tienda') {
+      // 🚀 Importante para que el backend aplique envío cero
+      direccionEnvio = 'RECOJO_EN_TIENDA';
     }
 
     return {
@@ -351,10 +349,11 @@ const Checkout: React.FC = () => {
         referencia: formData.referencia,
       },
       items: itemsPayload,
-      total: totalWithShipping,
-      metodoPago: paymentMethod!, // solo 'yape'
+      metodoPago: paymentMethod!,
+      notas: formData.comentarios || '',
     };
   };
+
 
   // Completar pedido (YapeModal confirma)
   const handleCompleteOrder = async () => {
@@ -552,11 +551,10 @@ const Checkout: React.FC = () => {
               <div className="space-y-4">
                 <button
                   onClick={() => handleDeliveryMethodSelect('tienda')}
-                  className={`w-full p-4 border-2 rounded-lg payment-button ${
-                    deliveryMethod === 'tienda'
+                  className={`w-full p-4 border-2 rounded-lg payment-button ${deliveryMethod === 'tienda'
                       ? 'border-green-500 bg-green-50'
                       : 'border-gray-200 hover:border-green-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
@@ -571,11 +569,10 @@ const Checkout: React.FC = () => {
 
                 <button
                   onClick={() => handleDeliveryMethodSelect('domicilio')}
-                  className={`w-full p-4 border-2 rounded-lg payment-button ${
-                    deliveryMethod === 'domicilio'
+                  className={`w-full p-4 border-2 rounded-lg payment-button ${deliveryMethod === 'domicilio'
                       ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-200 hover:border-blue-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -592,11 +589,10 @@ const Checkout: React.FC = () => {
 
                 <button
                   onClick={() => handleDeliveryMethodSelect('envio')}
-                  className={`w-full p-4 border-2 rounded-lg payment-button ${
-                    deliveryMethod === 'envio'
+                  className={`w-full p-4 border-2 rounded-lg payment-button ${deliveryMethod === 'envio'
                       ? 'border-purple-500 bg-purple-50'
                       : 'border-gray-200 hover:border-purple-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
@@ -625,11 +621,10 @@ const Checkout: React.FC = () => {
               <div className="space-y-4">
                 <button
                   onClick={() => handlePaymentMethodSelect('yape')}
-                  className={`w-full p-4 border-2 rounded-lg payment-button ${
-                    paymentMethod === 'yape'
+                  className={`w-full p-4 border-2 rounded-lg payment-button ${paymentMethod === 'yape'
                       ? 'border-purple-500 bg-purple-50'
                       : 'border-gray-200 hover:border-purple-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
@@ -692,9 +687,8 @@ const Checkout: React.FC = () => {
                       name="nombre"
                       value={formData.nombre}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                        errors.nombre ? 'border-red-300' : 'border-gray-300'
-                      }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.nombre ? 'border-red-300' : 'border-gray-300'
+                        }`}
                       placeholder="Tu nombre completo"
                       readOnly
                     />
@@ -714,9 +708,8 @@ const Checkout: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                        errors.email ? 'border-red-300' : 'border-gray-300'
-                      }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.email ? 'border-red-300' : 'border-gray-300'
+                        }`}
                       placeholder="tu@email.com"
                       readOnly
                     />
@@ -739,9 +732,8 @@ const Checkout: React.FC = () => {
                       name="telefono"
                       value={formData.telefono}
                       onChange={handleInputChange}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                        errors.telefono ? 'border-red-300' : 'border-gray-300'
-                      }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.telefono ? 'border-red-300' : 'border-gray-300'
+                        }`}
                       placeholder="+51 999 999 999"
                       readOnly
                     />
@@ -769,9 +761,8 @@ const Checkout: React.FC = () => {
                           name="direccion"
                           value={formData.direccion}
                           onChange={handleInputChange}
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                            errors.direccion ? 'border-red-300' : 'border-gray-300'
-                          }`}
+                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.direccion ? 'border-red-300' : 'border-gray-300'
+                            }`}
                           placeholder="Calle, número, urbanización"
                         />
                       </div>
@@ -793,9 +784,8 @@ const Checkout: React.FC = () => {
                         name="distrito"
                         value={formData.distrito}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                          errors.distrito ? 'border-red-300' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.distrito ? 'border-red-300' : 'border-gray-300'
+                          }`}
                         placeholder="Miraflores, San Isidro, etc."
                       />
                       {errors.distrito && (
@@ -823,9 +813,8 @@ const Checkout: React.FC = () => {
                           name="direccion"
                           value={formData.direccion}
                           onChange={handleInputChange}
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                            errors.direccion ? 'border-red-300' : 'border-gray-300'
-                          }`}
+                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.direccion ? 'border-red-300' : 'border-gray-300'
+                            }`}
                           placeholder="Calle, número, referencia local"
                         />
                       </div>
@@ -847,9 +836,8 @@ const Checkout: React.FC = () => {
                         name="departamento"
                         value={formData.departamento}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                          errors.departamento ? 'border-red-300' : 'border-gray-300'
-                        }`}
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${errors.departamento ? 'border-red-300' : 'border-gray-300'
+                          }`}
                         placeholder="Piura, Cusco, Arequipa, etc."
                       />
                       {errors.departamento && (
@@ -933,11 +921,10 @@ const Checkout: React.FC = () => {
                 <button
                   onClick={handleYapePayment}
                   disabled={isProcessing}
-                  className={`w-full py-4 px-6 rounded-lg font-bold transition-colors ${
-                    isProcessing
+                  className={`w-full py-4 px-6 rounded-lg font-bold transition-colors ${isProcessing
                       ? 'bg-gray-400 cursor-not-allowed'
                       : 'bg-purple-600 hover:bg-purple-700 text-white'
-                  }`}
+                    }`}
                 >
                   {isProcessing ? 'Procesando...' : 'Pagar con YAPE'}
                 </button>
