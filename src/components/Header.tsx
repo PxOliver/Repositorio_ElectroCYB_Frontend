@@ -3,10 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { Zap, Menu, X } from 'lucide-react';
 import CartIcon from './CartIcon';
 import UserIndicator from './UserIndicator';
+import { useAuth } from '../context/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  const { state } = useAuth();
+  const isAdmin = state.isAuthenticated && state.user?.role === 'ADMIN';
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -34,16 +38,21 @@ const Header: React.FC = () => {
               >
                 Inicio
               </Link>
-              <Link
-                to="/catalogo"
-                className={`font-medium transition-colors ${
-                  isActive('/catalogo')
-                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
-                    : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Catálogo
-              </Link>
+
+              {/* Catálogo solo para NO admins */}
+              {!isAdmin && (
+                <Link
+                  to="/catalogo"
+                  className={`font-medium transition-colors ${
+                    isActive('/catalogo')
+                      ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  Catálogo
+                </Link>
+              )}
+
               <Link
                 to="/contacto"
                 className={`font-medium transition-colors ${
@@ -55,14 +64,18 @@ const Header: React.FC = () => {
                 Contáctanos
               </Link>
             </nav>
+
             <UserIndicator />
-            <CartIcon />
+
+            {/* Carrito solo para NO admins */}
+            {!isAdmin && <CartIcon />}
           </div>
 
           {/* Mobile menu button and cart */}
           <div className="md:hidden flex items-center space-x-4">
             <UserIndicator />
-            <CartIcon />
+            {/* Carrito solo para NO admins en móvil también */}
+            {!isAdmin && <CartIcon />}
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -82,15 +95,20 @@ const Header: React.FC = () => {
               >
                 Inicio
               </Link>
-              <Link
-                to="/catalogo"
-                onClick={() => setIsMenuOpen(false)}
-                className={`font-medium py-2 text-left transition-colors ${
-                  isActive('/catalogo') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
-                }`}
-              >
-                Catálogo
-              </Link>
+
+              {/* Catálogo solo para NO admins en el menú móvil */}
+              {!isAdmin && (
+                <Link
+                  to="/catalogo"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`font-medium py-2 text-left transition-colors ${
+                    isActive('/catalogo') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  Catálogo
+                </Link>
+              )}
+
               <Link
                 to="/contacto"
                 onClick={() => setIsMenuOpen(false)}
