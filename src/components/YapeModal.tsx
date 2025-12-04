@@ -81,7 +81,7 @@ const YapeModal: React.FC<YapeModalProps> = ({ isOpen, onClose, total, onPayment
               <div className="text-center mb-6">
                 <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-lg qr-container overflow-hidden">
                   <img
-                    src={yapeData.qrCode}
+                    src={YAPE_QR_URL}
                     alt="YAPE QR Code"
                     className="w-48 h-48 mx-auto object-contain"
                     onMouseEnter={() => setIsZoomed(true)}
