@@ -4,6 +4,7 @@ import { ArrowLeft, MessageCircle, Star, Shield, Truck, Clock } from 'lucide-rea
 import { formatPriceWithSymbol } from '../config/currency';
 import AddToCartButton from '../components/AddToCartButton';
 import { getProductoById, getProductos, Producto } from '../api/products';
+import { buildImageUrl } from '../api/products'; // 👈 NUEVO
 
 const ProductoDetalle: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,8 +14,7 @@ const ProductoDetalle: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const getImageUrl = (img: string) =>
-    img.startsWith('http') ? img : `http://localhost:8080${img}`;
+  const getImageUrl = buildImageUrl;
 
   useEffect(() => {
     const cargar = async () => {
