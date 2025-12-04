@@ -9,7 +9,7 @@ import {
   VolumeX,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axiosInstance from '../api/axios';
+import axiosInstance, { API_BASE } from '../api/axios'; // 👈 IMPORTAMOS API_BASE
 
 // ------------------ Interfaces ------------------
 
@@ -42,9 +42,8 @@ interface ProductoDetalleApi {
   stock: number;
 }
 
-// 🔧 URL base del backend (puedes configurar VITE_BACKEND_URL en .env)
-const BACKEND_BASE_URL =
-  import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
+// ❌ YA NO DEFINIMOS BACKEND_BASE_URL AQUÍ
+// 🔧 Las imágenes usarán API_BASE, igual que el carrito
 
 // Sugerencias rápidas
 const quickSuggestions = [
@@ -129,8 +128,8 @@ const ProductCard: React.FC<{
       if (!product.id) return;
       setIsLoading(true);
       try {
-        // axiosInstance suele tener baseURL = "http://localhost:8080/api"
-        // Esto llama a GET http://localhost:8080/api/productos/{id}
+        // axiosInstance suele tener baseURL = `${API_BASE}/api`
+        // Aquí llamamos a GET {API_BASE}/api/productos/{id}
         const res = await axiosInstance.get<ProductoDetalleApi>(
           `/productos/${product.id}`
         );
@@ -149,13 +148,13 @@ const ProductCard: React.FC<{
   const displayPrice = detalle?.precio ? `S/ ${detalle.precio}` : product.price;
   const displayDescription = detalle?.descripcion ?? product.description;
 
-  // Construimos la URL completa de la imagen
+  // Construimos la URL completa de la imagen usando API_BASE (igual que en CartDrawer)
   const rawImagePath = detalle?.imagen;
   const imageUrl =
     rawImagePath && rawImagePath.length > 0
       ? rawImagePath.startsWith('http')
         ? rawImagePath
-        : `${BACKEND_BASE_URL}${rawImagePath}`
+        : `${API_BASE}${rawImagePath}`
       : undefined;
 
   return (
@@ -462,7 +461,7 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Botón flotante (ahora abajo a la IZQUIERDA, para no tapar otros botones) */}
+      {/* Botón flotante (abajo a la IZQUIERDA) */}
       <button
         onClick={toggleOpen}
         className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-40 group"
